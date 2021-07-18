@@ -1,0 +1,9 @@
+node_modules
+heap
+npm-debug.log
+.settings
+.project
+.vscode
+*.log
+.Rhistory
+package-lock.json
