@@ -1,0 +1,19 @@
+.homepage-header{
+    text-align: center;
+    background: #ff9999;
+    font-size: 1rem;
+    padding: 8px;
+}
+
+.homepage-released-movie{
+    width: 100%;
+    display: flex;
+}
+
+.homepage-released-movie .movie-list{
+    flex: 76%;
+}
+
+.homepage-released-movie .filter{
+    flex: 0 24%;
+}
