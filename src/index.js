@@ -3,13 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'typeface-roboto';
 import registerServiceWorker from './registerServiceWorker';
-//import Controller from './screens/Controller'; 
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./screens/home/Home";
+import Movie from "./screens/details/Details";
+import NotFound from "./common/NotFound/NotFound";
+import Layout from "./common/layout/Layout";
+import BookMovie from "./screens/bookshow/BookShow";
 
-const Test = () => {
-	return (<div>Test</div>);
-}
+const App = () => <BrowserRouter>
+	<Switch>
+	  	<Route exact path="/" render={() => <Layout renderComp =  {Home} />} />
+	    <Route path="/movie/:id" render={() => <Layout renderComp = {Movie} />} />
+		<Route path="/movie-book/:id" render={() => <Layout renderComp = {BookMovie} />} />
+	    <Route path="*" render={() => <Layout renderComp = {NotFound} />}  />
+	</Switch>
+</BrowserRouter>;
 
-ReactDOM.render(<Test />, document.getElementById('root'));
-
+ReactDOM.render(<App />, document.getElementById('root'));
 
 registerServiceWorker();
