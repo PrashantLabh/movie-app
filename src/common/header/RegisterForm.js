@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import {Button, Container, Grid, TextField, Typography} from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+  FormControl,
+  FormHelperText,
+} from "@material-ui/core";
 
 const RegisterForm = ({ handleClose }) => {
   const [firstName, setFirstName] = useState("");
@@ -42,68 +50,90 @@ const RegisterForm = ({ handleClose }) => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField
-                  style={{ width: 200 }}
-                  required
-                  label="First Name"
-                  name="firstName"
-                  size="small"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
+                <FormControl required className="formControl">
+                  <TextField
+                    required
+                    label="First Name"
+                    name="firstName"
+                    size="small"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                  <FormHelperText>
+                    <span className="red">Required</span>
+                  </FormHelperText>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  style={{ width: 200 }}
-                  required
-                  label="Last Name"
-                  name="lastName"
-                  size="small"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
+                <FormControl required className="formControl">
+                  <TextField
+                    required
+                    label="Last Name"
+                    name="lastName"
+                    size="small"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                  <FormHelperText>
+                    <span className="red">Required</span>
+                  </FormHelperText>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  style={{ width: 200 }}
-                  required
-                  label="Email"
-                  name="email"
-                  size="small"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <FormControl required className="formControl">
+                  <TextField
+                    required
+                    label="Email"
+                    name="email"
+                    size="small"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <FormHelperText>
+                    <span className="red">Required</span>
+                  </FormHelperText>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  style={{ width: 200 }}
-                  required
-                  label="Password"
-                  name="password"
-                  size="small"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <FormControl required className="formControl">
+                  <TextField
+                    required
+                    label="Password"
+                    name="password"
+                    size="small"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <FormHelperText>
+                    <span className="red">Required</span>
+                  </FormHelperText>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  style={{ width: 200 }}
-                  required
-                  label="Contact No."
-                  name="contact"
-                  size="small"
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                />
+                <FormControl required className="formControl">
+                  <TextField
+                    required
+                    label="Contact No."
+                    name="contact"
+                    size="small"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                  />
+                  <FormHelperText>
+                    <span className="red">Required</span>
+                  </FormHelperText>
+                </FormControl>
               </Grid>
             </Grid>
           </Grid>
-          {submitted ? <Grid item xs={12}>
-          <Typography variant="subtitle1" display="block" gutterBottom>
-              Registration Successful. Please login!
-            </Typography>
-          </Grid>: null}
+          {submitted ? (
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" display="block" gutterBottom>
+                Registration Successful. Please login!
+              </Typography>
+            </Grid>
+          ) : null}
           <Grid item xs={12}>
             <Button color="secondary" type="submit" variant="contained">
               Register

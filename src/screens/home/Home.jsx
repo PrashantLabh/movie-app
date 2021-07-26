@@ -1,11 +1,28 @@
+/** 
+ * THIS COMPONENT IS THE HOMEPAGE COMPONENT 
+ * THIS COMPONENT HAVE TOP UPCOMING MOVIE COMPONENT, AND RELEASED MOVIE COMPONENT WITH FILTER COMPONENT
+ * 
+ * **/
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ImageList, ImageListItem, ImageListItemBar, Container } from "@material-ui/core";
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  Container,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MovieFilter from "./movieFilter";
-import {getMovies, getMoviesWithFilter} from "../../services/movieService";
+import {
+  getMovies,
+  getMoviesWithFilter,
+  getGenres,
+  getArtists,
+} from "../../services/movieService";
 import "./Home.css";
 
+// USING STYLES OF MAKESTYLE FROM MATERIAL UI TO CREATE Styled COMPONENT
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -24,18 +41,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = ({setIsReleased}) => {
+// HOME PAGE COMPONENT
+const Home = ({ setIsReleased }) => {
+
+	//STATES
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [artists, setArtists] = useState([]);
 
   const classes = useStyles();
 
+  //MOUNTING OF COMPONENT
   useEffect(async () => {
-    setMovies((await getMovies()).movies);
-	setFilteredMovies((await getMoviesWithFilter({})).movies || []);
-	setIsReleased(false)
+    setMovies(((await getMovies()) || {}).movies);
+    setFilteredMovies(((await getMoviesWithFilter({})) || {}).movies || []);
+    setIsReleased(false);
+    setGenres(((await getGenres()) || {}).genres || []);
+    setArtists(((await getArtists()) || {}).artists || []);
   }, []);
 
+  //ON APPLYING FILTER 
   const onApplyfilter = async (filters) => {
     setFilteredMovies((await getMoviesWithFilter(filters)).movies);
   };
@@ -65,9 +91,16 @@ const Home = ({setIsReleased}) => {
       <div className="homepage-released-movie">
         <div className="movie-list">
           <Container maxWidth="xl" style={{ padding: 0 }}>
-            <ImageList rowHeight={350} cols={4} style={{padding: "20px 15px"}}>
+            <ImageList
+              rowHeight={350}
+              cols={4}
+              style={{ padding: "20px 15px" }}
+            >
               {filteredMovies.map((item) => (
-                <ImageListItem key={item.poster_url} style={{padding: "15px"}}>
+                <ImageListItem
+                  key={item.poster_url}
+                  style={{ padding: "15px" }}
+                >
                   <Link to={`/movie/${item.id}`} key={item.poster_url}>
                     <img
                       src={item.poster_url}
@@ -87,8 +120,12 @@ const Home = ({setIsReleased}) => {
             </ImageList>
           </Container>
         </div>
-        <div className="filter" style={{padding: "20px 5px"}}>
-          <MovieFilter handleSubmit={onApplyfilter} />
+        <div className="filter" style={{ padding: "20px 5px" }}>
+          <MovieFilter
+            handleSubmit={onApplyfilter}
+            artistList={artists}
+            genreList={genres}
+          />
         </div>
       </div>
     </div>

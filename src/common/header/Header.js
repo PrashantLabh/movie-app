@@ -1,5 +1,11 @@
+/** 
+ * THIS COMPONENT IS COMMON HEADER COMPONENT FOR ALL PAGES
+ * THIS ALSO HAVE LOGO COMPONENT, MODAL COMPONENT, TAB COMPONENT WHICH SWITCH BETWEEN LOGIN AND REGISTER 
+ * 
+ * **/
+
 import React, { useState } from "react";
-import { Redirect, Link, useParams} from "react-router-dom";
+import { Redirect, Link, useParams } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import {
   AppBar,
@@ -29,6 +35,8 @@ const customStyles = {
   },
 };
 
+
+// TOP PANEL COMPONENT FOR TABS
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -49,21 +57,24 @@ function TabPanel(props) {
   );
 }
 
-const Header = ({ isReleased, refreshHeader,  setRefreshHeader}) => {
+// MAIN HEADER COMPONENT
+const Header = ({ isReleased, refreshHeader, setRefreshHeader }) => {
+	//Logged in status stored in Session Storage
   const loggedInToken = sessionStorage.getItem("access-token");
+  // Getting ID from url Params
   const { id } = useParams();
+
+  //States
   const [modalIsOpen, setIsOpen] = useState(false);
   const [value, setValue] = React.useState(0);
 
+  // on click Logout
   function logOut() {
     sessionStorage.removeItem("access-token");
-	setRefreshHeader(!refreshHeader);
+    setRefreshHeader(!refreshHeader);
   }
 
-  function redirectToBook(){
-	  return <Redirect to="/movieshhh" />
-  }
-
+  //Tab utility function
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
@@ -71,6 +82,7 @@ const Header = ({ isReleased, refreshHeader,  setRefreshHeader}) => {
     };
   }
 
+  //On click Tab
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -88,9 +100,20 @@ const Header = ({ isReleased, refreshHeader,  setRefreshHeader}) => {
                 className="header-btn"
                 variant="contained"
                 color="primary"
-				onClick={!loggedInToken ? setIsOpen.bind(null, true) : null}
+                onClick={!loggedInToken ? setIsOpen.bind(null, true) : null}
               >
-                {!loggedInToken ? "Book Show" : <Link className="" to={`/movie-book/${id}`} style={{textDecoration: "none", color: "#fff"}}> Book Show</Link>}
+                {!loggedInToken ? (
+                  "Book Show"
+                ) : (
+                  <Link
+                    className=""
+                    to={`/movie-book/${id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    {" "}
+                    Book Show
+                  </Link>
+                )}
               </Button>
             ) : null}
             <Button

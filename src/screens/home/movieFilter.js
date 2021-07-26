@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Card from '@material-ui/core/Card';
-import Input from '@material-ui/core/Input';
+/** 
+ * THIS COMPONENT IS THE APPLY FILTER COMPONENT 
+ * WHICH IS IMPORTED IN THE HOMEPAGE
+ * THE STATES OF THE FILTER COMPONENT IS HANDLED INSIDE THE COMPONENT ITSELF
+ * **/
 
-const FilterForm = ({ handleSubmit }) => {
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Card,
+  Input,
+  Select,
+  TextField,
+  Grid,
+  Button,
+  FormHelperText,
+} from "@material-ui/core";
 
-  const [name, setName] = useState('');
+const FilterForm = ({ handleSubmit, artistList, genreList }) => {
+
+  //STATES
+  const [name, setName] = useState("");
   const [genre, setGenre] = useState([]);
   const [artists, setArtists] = useState([]);
-  const [releaseStartDate, setReleaseStartDate] = useState('');
-  const [releaseEndDate, setReleaseEndDate] = useState('');
+  const [releaseStartDate, setReleaseStartDate] = useState("");
+  const [releaseEndDate, setReleaseEndDate] = useState("");
+
+  //CONTANTS
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -28,132 +40,133 @@ const FilterForm = ({ handleSubmit }) => {
     },
   };
 
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
-
-
-const useStyles = makeStyles((theme) => ({
+  // USING STYLES FOR MATERIAL UI CLASSES
+  const useStyles = makeStyles((theme) => ({
     formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-        maxWidth: 300,
-      },
+      margin: theme.spacing(1),
+      minWidth: 120,
+      maxWidth: 300,
+    },
     root: {
       maxWidth: 240,
-      minWidth: 240
+      minWidth: 240,
     },
     media: {
       height: 140,
     },
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200,
-      },
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
+    },
   }));
 
   const classes = useStyles();
 
+  //ON CLICKING APPLY FILTER BUTTON
   const onSubmitFilter = () => {
-    handleSubmit({name, genre, artists, releaseStartDate, releaseEndDate})
-  }
+    handleSubmit({ name, genre, artists, releaseStartDate, releaseEndDate });
+  };
 
-  return (<Card className={classes.root} style={{padding: "15px"}}>
+  return (
+    <Card className={classes.root} style={{ padding: "15px" }}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-         <div>FIND MOVIES BY: </div>
+          <div>FIND MOVIES BY: </div>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <TextField
-                style={{ width: 200 }}
-                label="Movie Name"
-                name="name"
-                size="small"
-                value={name}
-                onChange={e => setName(e.target.value)} />
+              <FormControl required className="formControl">
+                <TextField
+                  name="name"
+                  label="Movie Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
+              <FormControl required className="formControl">
+                <InputLabel htmlFor="genre">Genre:</InputLabel>
                 <Select
-                    labelId="demo-mutiple-name-label"
-                    id="movie-genre"
-                    multiple
-                    label="Genre"
-                    value={genre}
-                    input={<Input />}
-                    MenuProps={MenuProps}
-                    onChange={e => setGenre(e.target.value)}
-                    >
-                    {names.map((name) => (
-                        <MenuItem key={name} value={name}>
-                        {name}
-                        </MenuItem>
-                    ))}
-                    </Select>
+                  value={genre}
+                  onChange={(e) => setGenre(e.target.value)}
+                  id="genre"
+                  multiple
+                >
+                  {genreList.map((genre) => (
+                    <MenuItem key={"genre" + genre.id} value={genre.genre}>
+                      {genre.genre}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
+              <FormControl required className="formControl">
+                <InputLabel htmlFor="artists">Artists</InputLabel>
                 <Select
-                    id="artists"
-                    label="Artists"
-                    multiple
-                    value={artists}
-                    input={<Input />}
-                    MenuProps={MenuProps}
-                    onChange={e => setArtists(e.target.value)}
+                  value={artists}
+                  onChange={(e) => setArtists(e.target.value)}
+                  id="artists"
+                  multiple
+                >
+                  {artistList.map((artist) => (
+                    <MenuItem
+                      key={"artist" + artist.id}
+                      value={artist.first_name}
                     >
-                    {names.map((name) => (
-                        <MenuItem key={name} value={name}>
-                        {name}
-                        </MenuItem>
-                    ))}
-                    </Select>
+                      {artist.first_name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
-            <TextField
-                id="datetime-local"
-                label="Release Date Start"
-                type="date"
-                name="releaseStartDate"
-                className={classes.textField}
-                value={releaseStartDate}
-                onChange={e => setReleaseStartDate(e.target.value)}
-                InputLabelProps={{
-                shrink: true,
-                }}
-            />
+              <FormControl required className="formControl">
+                <TextField
+                  id="datetime-local"
+                  label="Release Date Start"
+                  type="date"
+                  name="releaseStartDate"
+                  value={releaseStartDate}
+                  onChange={(e) => setReleaseStartDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
-            <TextField
-                id="datetime-local"
-                label="Release Date End"
-                type="date"
-                name="releaseEndDate"
-                className={classes.textField}
-                value={releaseEndDate}
-                onChange={e => setReleaseEndDate(e.target.value)}
-                InputLabelProps={{
-                shrink: true,
-                }}
-            />
+              <FormControl required className="formControl">
+                <TextField
+                  id="datetime-local"
+                  label="Release Date End"
+                  type="date"
+                  name="releaseEndDate"
+                  value={releaseEndDate}
+                  onChange={(e) => setReleaseEndDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </FormControl>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Button color="primary" type="submit" variant="contained" onClick={onSubmitFilter}>
+          <Button
+            color="primary"
+            type="submit"
+            variant="contained"
+            onClick={onSubmitFilter}
+            fullWidth
+          >
             APPLY
           </Button>
         </Grid>
       </Grid>
-  </Card>);
+    </Card>
+  );
 };
 
 export default FilterForm;

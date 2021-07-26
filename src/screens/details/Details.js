@@ -1,3 +1,8 @@
+/** 
+ * THIS COMPONENT IS THE MOVIE DETAIL COMPONENT 
+ * THIS COMPONENT HAVE BACK BUTTON HEADER AND THREE COMPONENTS LEFT, CENTER AND RIGHT DETAIL COMPONENT
+ * 
+ * **/
 import { LinkOffTwoTone } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -10,19 +15,23 @@ import {
 } from "@material-ui/core";
 import YouTube from "react-youtube";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import {getMovie} from "../../services/movieService";
+import { getMovie } from "../../services/movieService";
 
 import "./Details.css";
 
-const Details = ({setIsReleased}) => {
+const Details = ({ setIsReleased }) => {
+    // GETTING ID FROM url Params
   const { id } = useParams();
+
+  //States
   const [movieDetails, setMovieDetails] = useState("");
   const [rating, setRating] = useState(0);
 
-  useEffect(async() => {
+  //Mounting of COmponents
+  useEffect(async () => {
     let details = await getMovie(id);
     setMovieDetails(details);
-    if(details.status === "RELEASED") setIsReleased(true);
+    if (details.status === "RELEASED") setIsReleased(true);
   }, []);
 
   return (
@@ -99,7 +108,11 @@ const Details = ({setIsReleased}) => {
                 return (
                   <StarBorderIcon
                     key={`rate-${index}`}
-                    style={index < rating ? { color: "red", cursor: 'pointer' } : {cursor: 'pointer'}}
+                    style={
+                      index < rating
+                        ? { color: "red", cursor: "pointer" }
+                        : { cursor: "pointer" }
+                    }
                     onClick={setRating.bind(null, index + 1)}
                   />
                 );

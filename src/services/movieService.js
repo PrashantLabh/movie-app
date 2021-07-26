@@ -3,12 +3,14 @@ const headers = {
     "Cache-Control": "no-cache",
   };
 
+// GET LIST OF MOVIES BY PAGE NUMBER AND LIMIT
 export async function getMovies(){
     return fetch("http://localhost:3000/api/v1/movies?page=1&limit=10", {
       headers
     }).then(res => res.json());
 }
 
+//GET LIST OF MOVIES BY FILTER ON RELEASE START DATE, RELEASE END DATE, ARTISTS, GENRE AND NAME
 export async function getMoviesWithFilter(filters){
     let {releaseStartDate=null, releaseEndDate=null, artists=[], genre=[], name =null} = filters;
     const query = {
@@ -29,15 +31,26 @@ export async function getMoviesWithFilter(filters){
     }).then(res => res.json());
 }
 
+//GET MOVIE BY ID
 export async function getMovie(id){
     return fetch(`http://localhost:3000/api/v1/movies/${id}`, {
       headers
     }).then(res => res.json());
-    //   .then((data) => {
-    //     console.log(">>>>>>>SUCCESSFULLY FETCHED >>>>>>", data);
-    //     setMovieDetails(data);
-    //     if(data.status === "RELEASED") setIsReleased(true)
-    //   });
+}
+
+
+//GET LIST OF GENRES
+export async function getGenres(){
+    return fetch(`http://localhost:3000/api/v1/genres`, {
+      headers
+    }).then(res => res.json());
+}
+
+//GET LIST OF ARTISTS
+export async function getArtists(){
+    return fetch(`http://localhost:3000/api/v1/artists?page=1&limit=10000`, {
+      headers
+    }).then(res => res.json());
 }
 
 

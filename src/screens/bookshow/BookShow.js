@@ -13,7 +13,6 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import { useParams, Link } from "react-router-dom";
 
 const BookShow = (props) => {
-
   const { id } = useParams();
   const [location, setLocation] = useState("");
   const [theatre, setTheatre] = useState("");
@@ -196,9 +195,7 @@ const BookShow = (props) => {
     <div>
       <div className="bookShow">
         <Typography className="back">
-          <Link to={"/movie/" + id}>
-            &#60; Back to Movie Details
-          </Link>
+          <Link to={"/movie/" + id}>&#60; Back to Movie Details</Link>
         </Typography>
 
         <Card className="cardStyle">
@@ -285,9 +282,7 @@ const BookShow = (props) => {
             <br />
             <Typography>Unit Price: Rs. {unitPrice}</Typography>
             <br />
-            <Typography>
-              Total Price: Rs. {unitPrice * tickets}
-            </Typography>
+            <Typography>Total Price: Rs. {unitPrice * tickets}</Typography>
             <br />
             <br />
             <Button

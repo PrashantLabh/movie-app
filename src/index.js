@@ -10,6 +10,7 @@ import NotFound from "./common/NotFound/NotFound";
 import Layout from "./common/layout/Layout";
 import BookMovie from "./screens/bookshow/BookShow";
 
+//CLIENT SIDE REACT APP COMPONENT
 const App = () => <BrowserRouter>
 	<Switch>
 	  	<Route exact path="/" render={() => <Layout renderComp =  {Home} />} />
