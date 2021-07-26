@@ -1,0 +1,35 @@
+.movie-detail-page-container{
+    padding: 10px;
+}
+.back-btn{
+    margin: 8px 0px 0px 25px;
+    height: 24px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.movie-details{
+    width: 100%;
+    display: flex;
+}
+
+.movie-details .left-details{
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    padding: 0px 20px;
+}
+
+.left-details img {
+    width: 100%;
+}
+
+.movie-details .center-details{
+    flex: 3;
+    padding: 0px 20px;
+}
+
+.movie-details .right-details{
+    flex: 1;
+    padding: 0px 20px;
+}
