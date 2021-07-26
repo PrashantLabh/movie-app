@@ -6,6 +6,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+//Have ImageList,ImageListItem instead of Grid, GridItem as Grid is deprecated in Latest version of Material UI
 import {
   ImageList,
   ImageListItem,
@@ -71,6 +72,7 @@ const Home = ({ setIsReleased }) => {
       <div className="homepage-header">Upcoming Movies</div>
       <div className="homepage-upcoming-list" className={classes.root}>
         <Container maxWidth="xl" style={{ padding: 0 }}>
+		{/* Have ImageList,ImageListItem instead of Grid, GridItem as Grid is deprecated in Latest version of Material UI */}
           <ImageList rowHeight={250} cols={6} className={classes.imageList}>
             {movies.map((item) => (
               <ImageListItem key={item.poster_url}>
@@ -91,6 +93,7 @@ const Home = ({ setIsReleased }) => {
       <div className="homepage-released-movie">
         <div className="movie-list">
           <Container maxWidth="xl" style={{ padding: 0 }}>
+			{/* Have ImageList,ImageListItem instead of Grid, GridItem as Grid is deprecated in Latest version of Material UI */}
             <ImageList
               rowHeight={350}
               cols={4}

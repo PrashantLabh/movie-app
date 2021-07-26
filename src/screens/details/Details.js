@@ -3,9 +3,10 @@
  * THIS COMPONENT HAVE BACK BUTTON HEADER AND THREE COMPONENTS LEFT, CENTER AND RIGHT DETAIL COMPONENT
  * 
  * **/
-import { LinkOffTwoTone } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+
+//Have ImageList,ImageListItem instead of Grid, GridItem as Grid is deprecated in Latest version of Material UI
 import {
   ImageList,
   ImageListItem,
