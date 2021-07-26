@@ -1,0 +1,59 @@
+.header-container{
+	flex-grow: 1;
+}
+
+.MuiToolbar-root{
+	background: #222;
+	height: 36px;
+	min-height: 0 !important;
+	padding: 8px 32px 8px 16px;
+}
+
+.logo{
+	background: #ff7f7f;
+	height: 35px;
+	width: 35px;
+}
+
+.right-toolbar{
+	margin-left: auto;
+}
+
+.right-toolbar button{
+	margin-left: 10px;
+}
+
+
+.rotate {
+  animation: rotation 8s;
+}
+
+.linear {
+  animation-timing-function: linear;
+}
+
+.infinite {
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.form-root{
+	display: 'flex';
+    flex-direction: 'column';
+    justify-content: 'center';
+    align-items: 'center'
+}
+
+.center-aligned{
+  text-align: center;
+}
+
+
